@@ -1,0 +1,90 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #eaeaea;
+  text-align: center;
+  color: #4f4f4f;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+}
+
+div {
+  padding: 0;
+  padding-bottom: -10px;
+  margin: 0;
+}
+
+.jumbotron {
+  background: #eaeaea;
+  text-align: center;
+  color: #4f4f4f;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+}
+
+.spot {
+  height: 10em;
+  width: 10em;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  border-style: solid;
+  @media (max-width: 500px) {
+    width: 7em;
+    height: 7em;
+  }
+  h1 {
+    font-size: 100px;
+    margin:0;
+    padding: 0;
+  }
+  vertical-align:top;
+}
+
+.col-right {
+  border-right: 0;
+  border-left: 0;
+}
+
+.col-left {
+  border-left: 0;
+  border-right: 0;
+}
+
+.row-bottom {
+  border-bottom: 0;
+  border-top: 0;
+}
+
+.row-top {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.row {
+  margin: 0;
+}
+
+//
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
