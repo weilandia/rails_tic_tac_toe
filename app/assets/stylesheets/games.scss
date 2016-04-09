@@ -88,3 +88,7 @@ div {
   -moz-animation-duration:1s;
   animation-duration:1s;
 }
+
+.no-click {
+  pointer-events: none;
+}

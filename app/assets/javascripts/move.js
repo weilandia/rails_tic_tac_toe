@@ -11,7 +11,7 @@ $(document).ready(function(){
             method: 'get',
             url: '/games/' + id + "/moves",
             success: function(res) {
-              $( "#" + res[res.length - 1] ).unbind("click");
+              $( "#" + res[res.length - 1] ).parent().addClass("no-click");
               $( "#" + res[res.length - 1] ).append("o");
             }
           });
