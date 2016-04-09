@@ -14,6 +14,13 @@ class GamesController < ApplicationController
     render :show
   end
 
+  def last_move
+    @last_move = Game.find(game_params).moves.last
+    respond_to do |format|
+      format.json { render json: @last_move }
+    end
+  end
+
 private
   def game_params
     params.permit(:move, :id)
