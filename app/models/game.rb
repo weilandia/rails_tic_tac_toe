@@ -4,6 +4,7 @@ class Game < ActiveRecord::Base
 
   def make_move(move)
     plot_move(move, "x")
+    return "x" if win?("x")
     computer_move
   end
 
@@ -38,13 +39,15 @@ class Game < ActiveRecord::Base
     open_spaces.include?(space)
   end
 
-  def check_win(player)
-    win_lines.each do |win_line|
-      
+  def win?(player)
+    win_lines.values.each do |win_line|
+      win = win_line.select do |move|
+        player_moves = game_moves.where(player:player)
+        player_moves.pluck(:move_id).include?(move)
+      end
+      return true if win.sort == win_line
     end
-    game_moves.where(player: player).pluck(:id).select { |move|
-      require "pry"; binding.pry
-    }
+    false
   end
 
   def win_lines
