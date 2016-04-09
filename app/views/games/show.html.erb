@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <h1>Rails Tic Tac Toe</h1>
+</div>
+<div class="container">
+      <div class="spot col-left row-top" data-moves="00"><h1 id="00" ></h1></div>
+      <div class="spot col-middle row-top" data-moves="01"><h1 id="01" ></h1></div>
+      <div class="spot col-right row-top" data-moves="02"><h1 id="02" ></h1></div><br>
+      <div class="spot col-left row-middle" data-moves="10"><h1 id="10" ></h1></div>
+      <div class="spot col-middle row-middle" data-moves="11"><h1 id="11" ></h1></div>
+      <div class="spot col-right row-middle" data-moves="12"><h1 id="12" ></h1></div><br>
+      <div class="spot col-left row-bottom" data-moves="20"><h1 id="20" ></h1></div>
+      <div class="spot col-middle row-bottom" data-moves="21"><h1 id="21" ></h1></div>
+      <div class="spot col-right row-bottom" data-moves="22"><h1 id="22" ></h1></div>
+</div>
+
+<script type="text/javascript">
+  var id = "<%= @game.id %>"
+</script>
