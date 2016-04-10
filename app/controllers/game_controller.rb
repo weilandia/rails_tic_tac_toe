@@ -15,7 +15,6 @@ class GameController < ApplicationController
       flash[:info] = "SOMEONE WON!"
       redirect_to "/game/new"
     else
-      require "pry"; binding.pry
       render :index
     end
   end

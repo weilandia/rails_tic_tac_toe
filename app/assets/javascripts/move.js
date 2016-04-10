@@ -2,6 +2,7 @@ $(document).ready(function(){
   $(".spot").one('click', function(){
     var user_move = $(this).data('moves')
     $( "#" + user_move ).append("x");
+    $( "#" + user_move ).parent().addClass("no-click");
       $.ajax({
         method: 'put',
         url: '/game/update',
