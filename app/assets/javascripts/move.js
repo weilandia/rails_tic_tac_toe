@@ -10,12 +10,26 @@ $(document).ready(function(){
                 "player": "x" },
         success: function(res) {
           $.ajax({
-            method: 'put',
-            url: '/game/update',
-            data: { "player": "o" },
+            method: 'get',
+            url: '/',
+            data: { "player": "x" },
             success: function(res) {
-              $( "#" + res[res.length - 31] ).parent().addClass("no-click");
-              $( "#" + res[res.length - 31] ).append("o");
+            $.ajax({
+              method: 'put',
+              url: '/game/update',
+              data: { "player": "o" },
+              success: function(res) {
+                $( "#" + res[res.length - 31] ).parent().addClass("no-click");
+                $( "#" + res[res.length - 31] ).append("o");
+                $.ajax({
+                  method: 'get',
+                  url: '/',
+                  data: { "player": "o"},
+                  success: function(res) {
+                  }
+                  });
+                }
+              });
             }
           });
         }
