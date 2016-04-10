@@ -1,0 +1,56 @@
+<div class="jumbotron">
+  <h1>Rails Tic Tac Toe</h1>
+</div>
+<div class="container">
+  <div class="spot col-left row-top noclick<%= @game.moves["1"] %>" data-moves="1">
+    <h1 id="1" >
+      <%= @game.moves["1"] %>
+    </h1>
+  </div>
+  <div class="spot col-middle row-top noclick<%= @game.moves["2"] %>" data-moves="2">
+    <h1 id="2" >
+      <%= @game.moves["2"] %>
+    </h1>
+  </div>
+  <div class="spot col-right row-top noclick<%= @game.moves["3"] %>" data-moves="3">
+    <h1 id="3" >
+      <%= @game.moves["3"] %>
+    </h1>
+  </div>
+  <br>
+  <div class="spot col-left row-middle noclick<%= @game.moves["4"] %>" data-moves="4">
+    <h1 id="4" >
+      <%= @game.moves["4"] %>
+    </h1>
+  </div>
+  <div class="spot col-middle row-middle noclick<%= @game.moves["5"] %>" data-moves="5">
+    <h1 id="5" >
+      <%= @game.moves["5"] %>
+    </h1>
+  </div>
+  <div class="spot col-right row-middle noclick<%= @game.moves["6"] %>" data-moves="6">
+    <h1 id="6" >
+      <%= @game.moves["6"] %>
+    </h1>
+  </div>
+  <br>
+  <div class="spot col-left row-bottom noclick<%= @game.moves["7"] %>" data-moves="7">
+    <h1 id="7" >
+      <%= @game.moves["7"] %>
+    </h1>
+  </div>
+  <div class="spot col-middle row-bottom noclick<%= @game.moves["8"] %>" data-moves="8">
+    <h1 id="8" >
+      <%= @game.moves["8"] %>
+    </h1>
+  </div>
+  <div class="spot col-right row-bottom noclick<%= @game.moves["9"] %>" data-moves="9">
+    <h1 id="9" >
+      <%= @game.moves["9"] %>
+    </h1>
+  </div>
+  <br>
+</div>
+<script type="text/javascript">
+  var lastMove = "<%= @game.last_move %>"
+</script>

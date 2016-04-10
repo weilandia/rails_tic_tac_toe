@@ -4,18 +4,21 @@ $(document).ready(function(){
     $( "#" + value ).append("x");
       $.ajax({
         method: 'put',
-        url: '/games/' + id,
-        data: { "move": value },
+        url: '/game/update',
+        data: { "move": value,
+                "player": "x" },
         success: function(res) {
           $.ajax({
-            method: 'get',
-            url: '/games/' + id + "/moves",
+            method: 'put',
+            url: '/game/update',
+            data: { "move": value,
+                    "player": "o" },
             success: function(res) {
-              $( "#" + res[res.length - 1] ).parent().addClass("no-click");
-              $( "#" + res[res.length - 1] ).append("o");
+              $( "#" + res[res.length - 31] ).parent().addClass("no-click");
+              $( "#" + res[res.length - 31] ).append("o");
             }
           });
         }
+      });
     });
   });
-});

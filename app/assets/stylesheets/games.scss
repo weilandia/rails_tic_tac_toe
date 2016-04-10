@@ -89,6 +89,10 @@ div {
   animation-duration:1s;
 }
 
-.no-click {
+.no-click, .noclick-1, .noclick-2, .noclick-3, .noclick-4, .noclick-5, .noclick-6, .noclick-7, .noclick-8, .noclick-9 {
   pointer-events: none;
+}
+
+.hidden {
+  display: none;
 }
