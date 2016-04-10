@@ -10,11 +10,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% flash.each do |type, message| %>
-  <%= content_tag :div, sanitize(message), class: "alert alert_#{type}" %>
-<% end %>
+
 
 <%= yield %>
+<% flash.each do |type, message| %>
+  <%= content_tag :h3, sanitize(message), class: "alert alert_#{type}" %>
+<% end %>
 
 </body>
 </html>
