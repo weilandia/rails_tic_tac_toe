@@ -96,3 +96,12 @@ div {
 .hidden {
   display: none;
 }
+
+.alert_info {
+  margin-top: -6px;
+  margin-bottom:0;
+  border-radius:0;
+  text-align: center;
+  color: white;
+  background-color: #1abc9c;
+}

@@ -4,8 +4,6 @@ class Game
 
   def initialize(moves)
     @moves = moves || new_board
-    @last_move = nil
-    @current_player = nil
   end
 
   def add_move(game_params)
@@ -53,8 +51,7 @@ class Game
   def win?(player)
     win_lines.values.each do |win_line|
       win = win_line.select do |move|
-        player_moves = game_moves.where(player:player)
-        player_moves.pluck(:move_id).include?(move)
+        moves[move] == player
       end
       return true if win.sort == win_line
     end
@@ -62,14 +59,14 @@ class Game
   end
 
   def win_lines
-    { r1: [1, 2, 3],
-      r2: [4, 5, 6],
-      r3: [7, 8, 9],
-      c1: [1, 4, 7],
-      c2: [2, 5, 8],
-      c3: [3, 6, 9],
-      d1: [1, 5, 9],
-      d2: [3, 5, 7]
+    { r1: ["1", "2", "3"],
+      r2: ["4", "5", "6"],
+      r3: ["7", "8", "9"],
+      c1: ["1", "4", "7"],
+      c2: ["2", "5", "8"],
+      c3: ["3", "6", "9"],
+      d1: ["1", "5", "9"],
+      d2: ["3", "5", "7"]
     }
   end
 
