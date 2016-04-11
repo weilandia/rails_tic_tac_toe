@@ -23,7 +23,7 @@ class Game
   def computer_move
     return add_move({"move" => "5", "player" => "o"}) if center_open?
     return go_for_win if !win_line.empty?
-    return block if !danger_line.nil?
+    return block if !danger_line.empty?
     attack
   end
 
@@ -33,12 +33,73 @@ class Game
     add_move({"move" => move, "player" => current_player})
   end
 
+  def attack
+    return add_move({"move" => fork_line, "player" => current_player}) if fourth_move? && opponent_forked_corners?
+    return add_move({"move" => move_line, "player" => current_player}) if open_corners.empty?
+    return opportunity if !opportunity_line.empty?
+    add_move({"move" => open_corners.keys.sample, "player" => current_player})
+  end
+
+  def move_line
+    check_move(check_lines(1))
+  end
+
+  def fourth_move?
+    moves.values.compact.length == 3
+  end
+
+  def opponent_forked_corners?
+    moves["1"] == on_deck_player && moves["9"] == on_deck_player || moves["3"] == on_deck_player && moves["7"] == on_deck_player
+  end
+
+  def check_corners
+    moves.select do |move, player|
+      player == on_deck_player && corners.include?(move)
+    end
+  end
+
+  def open_corners
+     moves.select do |move, player|
+      corners.include?(move) && open_spaces.include?(move)
+    end
+  end
+
+  def corners
+    ["1", "3", "7", "9"]
+  end
+
+  def fork_line
+    "4"
+  end
+
   def go_for_win
     smart_move(win_line)
   end
 
+  def block
+    smart_move(danger_line)
+  end
+
+  def opportunity
+    smart_move(opportunity_line)
+  end
+
   def win_line
     check_win(check_lines(2))
+  end
+
+  def danger_line
+    check_danger(check_lines(2))
+  end
+
+  def opportunity_line
+    check_opportunity(check_lines(1))
+  end
+
+  def check_opportunity(lines)
+    lines.select do |_line, players|
+       players.compact == [current_player]
+    end
   end
 
   def check_lines(n)
@@ -53,9 +114,21 @@ class Game
     end
   end
 
+  def check_danger(lines)
+    lines.select do |_line, players|
+       players.compact == [on_deck_player, on_deck_player]
+    end
+  end
+
   def open_spaces
     moves.select do |move, player|
       player == nil
+    end
+  end
+
+  def on_deck_player
+    if current_player == "x" then "o"
+    else "x"
     end
   end
 
@@ -72,9 +145,21 @@ class Game
       win = win_line.select do |move|
         moves[move] == player
       end
-      return true if win.sort == win_line
+      return winner(player) if win.sort == win_line
     end
     false
+  end
+
+  def winner(player)
+    if player == "o"
+      "The computer"
+    else
+      "You"
+    end
+  end
+
+  def draw?
+    open_spaces.length == 0
   end
 
   def win_lines
@@ -99,6 +184,14 @@ class Game
       d1: [moves["1"], moves["5"], moves["9"]],
       d2: [moves["3"], moves["5"], moves["7"]]
     }
+  end
+
+  def opposite_corners
+    { "1" => ["3", "7", "9"],
+      "3" => ["1", "7", "9"],
+      "7" => ["1", "3", "9"],
+      "9" => ["1", "3", "7"]
+      }
   end
 
   def new_board
