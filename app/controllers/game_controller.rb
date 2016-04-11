@@ -2,14 +2,14 @@ class GameController < ApplicationController
 
   def index
     if game_params[:player] && @game.win?(game_params[:player])
+      reset_session
       flash[:info] = "#{@game.win?(game_params[:player])}"
       flash.keep(:info)
-      reset_session
       render js: "window.location = '#{root_path}'"
     elsif game_params[:player] && @game.draw?
+      reset_session
       flash[:info] = "an unlikely draw..."
       flash.keep(:info)
-      reset_session
       render js: "window.location = '#{root_path}'"
     else
       render :index
