@@ -36,7 +36,6 @@ class Game
   def attack
     return add_move({"move" => fork_line, "player" => current_player}) if move_count(3) && opponent_forked_corners?
     return add_move({"move" => move_line, "player" => current_player}) if open_corners.empty?
-    return opportunity if !opportunity_line.empty? && move_count(6)
     add_move({"move" => open_corners.keys.sample, "player" => current_player})
   end
 

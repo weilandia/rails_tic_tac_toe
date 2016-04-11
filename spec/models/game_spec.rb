@@ -121,31 +121,6 @@ RSpec.describe Game, type: :model do
     expect(@game.win?("x")).to eq(false)
   end
 
-  scenario "computer takes futile opportunity" do
-    @game = Game.new({"1"=>"x",
-                     "2"=>nil,
-                     "3"=>nil,
-                     "4"=>"o",
-                     "5"=>"o",
-                     "6"=>"x",
-                     "7"=>"x",
-                     "8"=>nil,
-                     "9"=>nil})
-    @game.make_move({"player" => "o"})
-
-    expect(@game.moves).to eq({"1"=>"x",
-                               "2"=>"o",
-                               "3"=>nil,
-                               "4"=>"o",
-                               "5"=>"o",
-                               "6"=>"x",
-                               "7"=>"x",
-                               "8"=>nil,
-                               "9"=>nil})
-
-    expect(@game.win?("x")).to eq(false)
-  end
-
   scenario "computer responds to asynchronous play" do
     @game = Game.new({"1"=>"x",
                      "2"=>"o",
