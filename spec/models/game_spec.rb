@@ -40,7 +40,7 @@ RSpec.describe Game, type: :model do
                                "8"=>nil,
                                "9"=>nil})
 
-    expect(@game.win?("o")).to eq("The computer")
+    expect(@game.win?("o")).to eq("you shouldn't have lost, but you did...")
   end
 
   scenario "computer blocks user from winning" do

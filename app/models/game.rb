@@ -152,9 +152,9 @@ class Game
 
   def winner(player)
     if player == "o"
-      "The computer"
+      "you shouldn't have lost, but you did..."
     else
-      "You"
+      "you won...and found a bug (if you could, please email a screenshot of your game to nickweiland@gmail.com thx!!)"
     end
   end
 
