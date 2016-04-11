@@ -6,11 +6,6 @@ class Game
     @moves = moves || new_board
   end
 
-  def add_move(game_params)
-    moves[game_params["move"]] = current_player
-    self.last_move = game_params["move"]
-  end
-
   def make_move(game_params)
     self.current_player = game_params["player"]
     if current_player == "x"
@@ -20,12 +15,23 @@ class Game
     end
   end
 
+  def add_move(game_params)
+    moves[game_params["move"]] = current_player
+    self.last_move = game_params["move"]
+  end
+
   def computer_move
     return add_move({"move" => "5", "player" => "o"}) if center_open?
     return go_for_win if !win_line.empty?
     return block if !danger_line.empty?
+    return adjacent_block if !adjacent_corner.empty? && move_count(3)
     attack
   end
+
+  def go_for_win
+    smart_move(win_line)
+  end
+
 
   def smart_move(line)
     coordinate = line.values.flatten.index(nil)
@@ -39,12 +45,26 @@ class Game
     add_move({"move" => open_corners.keys.sample, "player" => current_player})
   end
 
+  def block
+    smart_move(danger_line)
+  end
+
+  def adjacent_block
+    add_move({"move" => adjacent_corners[adjacent_corner.keys.sample].sample, "player" => current_player})
+  end
+
+  def adjacent_corner
+    moves.select do |move, player|
+      player == on_deck_player && move.to_i.even?
+    end
+  end
+
   def move_line
     open_spaces.keys.first
   end
 
   def move_count(count)
-    moves.values.compact.length >= count
+    moves.values.compact.length == count
   end
 
   def opponent_forked_corners?
@@ -69,14 +89,6 @@ class Game
 
   def fork_line
     "4"
-  end
-
-  def go_for_win
-    smart_move(win_line)
-  end
-
-  def block
-    smart_move(danger_line)
   end
 
   def opportunity
@@ -191,6 +203,14 @@ class Game
       "7" => ["1", "3", "9"],
       "9" => ["1", "3", "7"]
       }
+  end
+
+  def adjacent_corners
+    { "2" => ["1", "3"],
+      "4" => ["1", "7"],
+      "6" => ["3", "9"],
+      "8" => ["7", "9"],
+    }
   end
 
   def new_board
