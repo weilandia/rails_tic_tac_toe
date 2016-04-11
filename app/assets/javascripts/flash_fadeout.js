@@ -1,3 +1,3 @@
 setTimeout(function() {
   $(".alert").fadeOut().empty();
-}, 2000);
+}, 4000);

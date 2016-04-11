@@ -34,18 +34,18 @@ class Game
   end
 
   def attack
-    return add_move({"move" => fork_line, "player" => current_player}) if fourth_move? && opponent_forked_corners?
+    return add_move({"move" => fork_line, "player" => current_player}) if move_count(3) && opponent_forked_corners?
     return add_move({"move" => move_line, "player" => current_player}) if open_corners.empty?
-    return opportunity if !opportunity_line.empty?
+    return opportunity if !opportunity_line.empty? && move_count(5)
     add_move({"move" => open_corners.keys.sample, "player" => current_player})
   end
 
   def move_line
-    check_move(check_lines(1))
+    open_spaces.keys.first
   end
 
-  def fourth_move?
-    moves.values.compact.length == 3
+  def move_count(count)
+    moves.values.compact.length >= count
   end
 
   def opponent_forked_corners?
